@@ -44,7 +44,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/about"
+                to="/creteEvent"
                 className={({ isActive }) =>
                   `block text-gray-100 hover:text-gray-300 transition-colors duration-300 py-2 ${
                     isActive ? 'font-bold  text-blue-700 ' : 'font-sans'
@@ -52,7 +52,7 @@ const Header = () => {
                 }
                 onClick={closeMenu}
               >
-                About
+                Create Events
               </NavLink>
             </li>
             <li>
