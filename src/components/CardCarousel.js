@@ -17,7 +17,7 @@ const CardCarousel = () => {
   }, [images.length]);
 
   return (
-    <div className="relative mb-5 p-5 w-full mt-10 h-80 overflow-hidden">
+    <div className="relative mb-2  w-full h-[50vh] lg:h-[70vh] overflow-hidden">
       <div className="absolute inset-0 flex justify-center items-center w-full h-full">
         {images.map((image, index) => (
           <div

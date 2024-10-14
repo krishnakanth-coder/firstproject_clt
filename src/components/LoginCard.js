@@ -1,28 +1,3 @@
-// function setCookie(name, value, days) {
-//   let expires = '';
-//   if (days) {
-//     const date = new Date();
-//     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-//     expires = '; expires=' + date.toUTCString();
-//   }
-//   document.cookie = name + '=' + (value || '') + expires + '; path=/';
-// }
-// setCookie('name', 'krishna', 1);
-
-// function getCookie(name) {
-//   const nameEQ = name + '=';
-//   const ca = document.cookie.split(';');
-//   for (let i = 0; i < ca.length; i++) {
-//     let c = ca[i];
-//     while (c.charAt(0) === ' ') c = c.substring(1);
-//     if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-//   }
-//   return null;
-// }
-// const userName = getCookie('name');
-// console.log(userName);
-// src/components/LoginForm.jsx
-
 import React, { useState } from 'react';
 const LoginCard = (props) => {
   const { CheckIsLogin } = props;
@@ -43,7 +18,7 @@ const LoginCard = (props) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-sm bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -54,7 +29,7 @@ const LoginCard = (props) => {
             <input
               id="name"
               name="name"
-              type="text"
+              type="email"
               value={formData.name}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
