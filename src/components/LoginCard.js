@@ -24,7 +24,7 @@ const LoginCard = (props) => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
-              Name
+              Email
             </label>
             <input
               id="name"

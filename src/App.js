@@ -17,15 +17,16 @@ const App = () => {
     brideName: 'Seetha',
     groomName: 'Rama',
   });
+  const apiBaseUrl = process.env.REACT_APP_URL;
 
   useEffect(() => {
     getLiveUrl();
-  }, []);
+  }, [liveData]);
 
   // get api
   const getLiveUrl = async () => {
     try {
-      const LiveData = await axios.get('http://localhost:5000/api/youtube/liveItems');
+      const LiveData = await axios.get(`${apiBaseUrl}/api/youtube/liveItems`);
       if (LiveData.status === 200) {
         setLiveData({
           videoId: LiveData.data.id,
@@ -35,11 +36,11 @@ const App = () => {
     } catch (error) {
       if (error.response) {
         // Server responded with a status other than 2xx
-        console.error('Error response:', error.response.data);
-        console.error('Error status:', error.response.status);
+        //console.error('Error response:', error.response.data);
+        //console.error('Error status:', error.response.status);
       } else if (error.request) {
         // No response received from the server
-        console.error('Error request:', error.request);
+        //console.error('Error request:', error.request);
       } else {
         // Error setting up the request
         console.error('Axios error:', error.message);
@@ -57,7 +58,7 @@ const App = () => {
     let youTubeUrl = data.videoId;
     console.log(data);
     const updateLiveEvent = await axios.put(
-      ` http://localhost:5000/api/youtube/LiveVideo/66ec11f46afb40635d95f00c`,
+      ` {apiBaseUrl}/api/youtube/LiveVideo/66ec11f46afb40635d95f00c`,
       { youTubeUrl },
     );
     if (updateLiveEvent.status === 200) {
