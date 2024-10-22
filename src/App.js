@@ -1,8 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
-
-//import About from './pages/About';
+// import About from './pages/About';
 import CreateEvent from './pages/CreateEvent';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
@@ -17,54 +16,63 @@ const App = () => {
     brideName: 'Seetha',
     groomName: 'Rama',
   });
+
   const apiBaseUrl = process.env.REACT_APP_URL;
 
   useEffect(() => {
     getLiveUrl();
-  }, [liveData]);
+  }, []);
 
-  // get api
+  // Get live video data from the API
   const getLiveUrl = async () => {
     try {
-      const LiveData = await axios.get(`${apiBaseUrl}/api/youtube/liveItems`);
-      if (LiveData.status === 200) {
+      const response = await axios.get(`${apiBaseUrl}/api/youtube/liveItems`);
+      console.log({ response });
+
+      if (response.status === 200) {
         setLiveData({
-          videoId: LiveData.data.id,
-          videoUrlId: LiveData.data.videos[0].youTubeUrl,
+          videoId: response.data.id,
+          videoUrlId: response.data.videos[0].youTubeUrl,
         });
       }
     } catch (error) {
       if (error.response) {
-        // Server responded with a status other than 2xx
-        //console.error('Error response:', error.response.data);
-        //console.error('Error status:', error.response.status);
+        // Handle server errors
+        console.error('Error response:', error.response.data);
+        console.error('Error status:', error.response.status);
       } else if (error.request) {
-        // No response received from the server
-        //console.error('Error request:', error.request);
+        // Handle no response from the server
+        console.error('Error request:', error.request);
       } else {
-        // Error setting up the request
+        // Handle other errors
         console.error('Axios error:', error.message);
       }
     }
   };
 
+  // Function to update the upcoming event
   const updateEvent = (evtData) => {
     setUpcomingEvent(evtData);
   };
 
+  // Function to update the live video data
   const updateLive = async (data) => {
-    // setLiveData({ youtubeData: data });
-
-    let youTubeUrl = data.videoId;
+    const youTubeUrl = data.videoId;
     console.log(data);
-    const updateLiveEvent = await axios.put(
-      ` {apiBaseUrl}/api/youtube/LiveVideo/66ec11f46afb40635d95f00c`,
-      { youTubeUrl },
-    );
-    if (updateLiveEvent.status === 200) {
-      setLiveData((prev) => ({ ...prev, videoUrlId: youTubeUrl }));
+
+    try {
+      const updateLiveEvent = await axios.put(
+        `${apiBaseUrl}/api/youtube/LiveVideo/66ec11f46afb40635d95f00c`, // Use a valid string template with backticks and interpolation
+        { youTubeUrl },
+      );
+
+      if (updateLiveEvent.status === 200) {
+        setLiveData((prev) => ({ ...prev, videoUrlId: youTubeUrl }));
+      }
+      console.log(updateLiveEvent);
+    } catch (error) {
+      console.error('Error updating live video:', error);
     }
-    console.log(updateLiveEvent);
   };
 
   return (
@@ -74,7 +82,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home upcomingEvent={upcomingEvent} liveData={liveData} />} />
           <Route
-            path="/creteEvent"
+            path="/createEvent" // Fixed typo in the route path
             element={<CreateEvent updateEvent={updateEvent} updateLive={updateLive} />}
           />
           <Route path="/services" element={<Services />} />
@@ -84,4 +92,5 @@ const App = () => {
     </div>
   );
 };
+
 export default App;
