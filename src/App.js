@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     getLiveUrl();
-  }, []);
+  }, [liveData]);
 
   // Get live video data from the API
   const getLiveUrl = async () => {
