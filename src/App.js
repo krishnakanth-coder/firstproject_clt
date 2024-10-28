@@ -15,7 +15,7 @@ const App = () => {
     marriageDate: '2025-01-01',
     marriageTime: '00:38',
     brideName: 'Seetha',
-    groomName: 'Rama',
+    groomName: 'Raman',
   });
   const apiBaseUrl = process.env.REACT_APP_URL;
   // get api
