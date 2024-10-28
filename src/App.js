@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     getLiveUrl();
-  }, []);
+  }, [getLiveUrl]);
 
   // get api
   const getLiveUrl = async () => {
