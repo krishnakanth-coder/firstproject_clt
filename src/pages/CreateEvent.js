@@ -37,9 +37,10 @@ const CreateEvent = (props) => {
           'Content-Type': 'application/json',
         },
       });
-      // console.log(LoginApi.status);
-      // console.log(LoginApi.data);
-      if (LoginApi.statusText === 'OK') {
+      let loginData = LoginApi;
+      console.log({ loginData });
+      console.log(LoginApi.data);
+      if (LoginApi.statusText === 'OK' || LoginApi.status === 200) {
         setIsLogin(true);
       }
 
