@@ -17,7 +17,7 @@ const App = () => {
     brideName: 'Seetha',
     groomName: 'Raman',
   });
-  const apiBaseUrl = process.env.REACT_APP_URL;
+  ;
   // get api
   const getLiveUrl = async () => {
     try {
